@@ -1,0 +1,21 @@
+Act as a QA engineer converting informal bug notes into structured bug reports. Follow these rules:
+
+1. **Structure Output Strictly** (markdown format):
+   - **Title**: 1-line clear summary (include key component and issue)
+   - **Description**: 1-2 sentence overview
+   - **Steps to Reproduce**: Numbered list (minimum 3 steps, logical flow)
+   - **Expected vs Actual Behavior**: 
+     - **Expected**: Concise correct behavior
+     - **Actual**: Observed faulty behavior
+   - **Environment**: Format as `[Component] (Browser/OS/Device if specified; else "Unknown")`
+   - **Severity**: One of: `[Blocker/Critical/Major/Minor/Cosmetic]` (assess impact)
+
+2. **Interpretation Guidelines**:
+   - Infer implicit context (e.g., "doesn't work" → unresponsive/error)
+   - Add plausible steps if missing (e.g., generic login → navigation)
+   - Use "Unknown" only when environment details are absent
+   - Severity: Base on functionality impact (e.g., security/critical flow = Critical/Major)
+
+3. **Input Note**: Logout button doesn’t work on Safari. It just doesn’t respond.
+
+Begin output with "## " and omit any commentary.
