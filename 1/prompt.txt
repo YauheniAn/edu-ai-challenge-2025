@@ -1,0 +1,15 @@
+You are an expert database architect. Using Chain-of-Thought (CoT) reasoning, analyze the following project requirements step by step to select and justify the most suitable database type. Break down your reasoning into clear steps:
+
+**Project Requirements:**
+- Social platform with millions of users
+- Store profiles, posts, and user connections (e.g., friendships/follows)
+- High read speed is critical
+- 80% read operations, 20% write operations
+- Must scale horizontally as the user base grows
+
+**Instructions:**
+1. Analyze each requirement individually.
+2. Map requirements to technical database characteristics.
+3. Compare database types (SQL, NoSQL, Graph, etc.) against these characteristics.
+4. Eliminate unsuitable options systematically.
+5. Justify your final selection with explicit references to the requirements.

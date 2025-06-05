@@ -1,0 +1,72 @@
+### Chain-of-Thought Reasoning for Database Selection
+
+**Step 1: Analyze key requirements**  
+- *Millions of users* → Needs horizontal scalability (distributed systems).  
+- *Profiles/posts/connections* → Requires flexible schema for unstructured/semi-structured data (e.g., posts with images/comments).  
+- *High read speed* → Prioritize read-optimized databases with caching/replication.  
+- *80% reads / 20% writes* → Optimize for frequent queries over write speed.  
+- *Scalability* → Must support sharding and cluster expansion.  
+
+**Step 2: Map requirements to database characteristics**  
+- Horizontal scaling → NoSQL (supports auto-sharding).  
+- Flexible data models → Schemaless databases (e.g., document/graph).  
+- Read-heavy workload → Replication and in-memory caching capabilities.  
+- Relationships (connections) → Native support for graph-like traversals.  
+
+**Step 3: Evaluate database types**  
+- **SQL (e.g., PostgreSQL):**  
+  - ❌ Weak in horizontal scaling (sharding is complex).  
+  - ❌ Rigid schema limits flexibility for evolving data (e.g., posts).  
+  - ⚠️ Relationships handled via joins, but slow for deep traversals (e.g., "friends of friends").  
+
+- **Key-Value Stores (e.g., Redis):**  
+  - ✅ Excellent read speed (in-memory).  
+  - ❌ Cannot efficiently model relationships or complex data (profiles/posts).  
+  - ❌ Not ideal for persistent storage.  
+
+- **Wide-Column Stores (e.g., Cassandra):**  
+  - ✅ Strong horizontal scalability.  
+  - ✅ High read/write throughput.  
+  - ❌ Poor at handling interconnected data (manual denormalization needed).  
+
+- **Graph Databases (e.g., Neo4j):**  
+  - ✅ Perfect for connections (e.g., friend recommendations via native traversals).  
+  - ❌ Suboptimal for scaling to millions of *independent* records (e.g., posts).  
+  - ❌ Writes are slower; read-heavy focus but not as fast as document stores.  
+
+- **Document Databases (e.g., MongoDB):**  
+  - ✅ Schemaless (handles varied profiles/posts).  
+  - ✅ Horizontal scaling via sharding.  
+  - ✅ Optimized for read-heavy workloads (replica sets).  
+  - ⚠️ Relationships require application-level handling (less efficient than graph).  
+
+**Step 4: Hybrid approach consideration**  
+- *Problem:* No single database excels at all requirements.  
+- *Solution:* Combine databases:  
+  1. **Document DB (e.g., MongoDB)** for profiles/posts:  
+     - High read speed and scalability.  
+     - Flexible schema for unstructured data.  
+  2. **Graph DB (e.g., Neo4j)** for connections:  
+     - Efficient relationship queries (e.g., "mutual friends").  
+- *Challenge:* Increased complexity from polyglot persistence.  
+
+**Step 5: Final selection based on tradeoffs**  
+- **Primary Choice: Document Database (MongoDB)**  
+  - ✅ Directly satisfies:  
+    - Scalability (auto-sharding) for millions of users.  
+    - Read speed (replica sets + in-memory caching).  
+    - 80% read workload (native read optimization).  
+    - Flexible storage for profiles/posts.  
+  - ⚠️ Compromise:  
+    - Connections handled via references (application code) instead of native traversals.  
+    - Mitigation: Use embedded documents for direct relationships (e.g., followers list).  
+
+- **Why not pure Graph DB?**  
+  - ❌ Write operations (20%) would bottleneck graph updates.  
+  - ❌ Less efficient at scaling for post storage vs. document DBs.  
+
+- **Why not SQL?**  
+  - ❌ Vertical scaling limits growth; joins degrade performance at scale.  
+
+**Conclusion**  
+**MongoDB (Document Database)** is optimal, as it directly addresses scalability, read speed, and flexible data storage. For complex connection traversals, supplement with a graph database only if friend-recommendation latency becomes critical post-launch.  
