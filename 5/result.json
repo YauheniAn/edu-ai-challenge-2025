@@ -1,0 +1,49 @@
+[
+  {
+    "sentiment": "Negative",
+    "isRelevant": true,
+    "mainSubject": "Sensor reliability and connectivity issues",
+    "positives": [],
+    "painPoints": [
+      "Sensor stops tracking intermittently",
+      "Problem persists even when plugged in",
+      "Dongle malfunctioned on first unit",
+      "High price not justified by reliability"
+    ],
+    "improvementSuggestions": [
+      "Improve sensor stability at high polling rates",
+      "Ensure dongle reliability before shipping",
+      "Enhance quality control for consistent performance"
+    ],
+    "featuresMentioned": [
+      "Sensor",
+      "Polling rate",
+      "Wired connection",
+      "Dongle",
+      "Price"
+    ],
+    "userExpertise": "Experienced",
+    "isRelevant": true
+  },
+  {
+    "sentiment": "Mixed",
+    "isRelevant": true,
+    "mainSubject": "Value proposition and pricing",
+    "positives": [
+      "No flaws in functionality"
+    ],
+    "painPoints": [
+      "Price not justified by performance gains"
+    ],
+    "improvementSuggestions": [
+      "Lower the price to better reflect value relative to competition"
+    ],
+    "featuresMentioned": [
+      "Price",
+      "Performance",
+      "Specifications"
+    ],
+    "userExpertise": "Unknown",
+    "isRelevant": true
+  }
+]
